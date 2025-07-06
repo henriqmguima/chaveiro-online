@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../public/assets/js/cadastro-sala.js" defer></script>
+  <link rel="stylesheet" href="../public/assets/css/style.css" />
+  <title>Cadastrar Sala</title>
+</head>
+
+<body>
+  <h1>Cadastro de Sala</h1>
+
+  <form id="form-sala">
+    <label>
+      Nome da Sala:
+      <input type="text" id="nome" required />
+    </label>
+    <label>
+      Bloco:
+      <input type="text" id="bloco" required />
+    </label>
+    <label>
+      Quantidade de Chaves:
+      <input type="number" id="quantidade" min="1" required />
+    </label>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <p id="mensagem"></p>
+
+</body>
+
+</html>

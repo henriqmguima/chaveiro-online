@@ -1,0 +1,125 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1.5px solid #bdc3c7;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #1f6391;
+}
+
+#mensagem, #msg {
+  margin-top: 15px;
+  font-weight: 600;
+  text-align: center;
+  min-height: 24px;
+}
+
+#mensagem {
+  color: #27ae60; /* verde para sucesso */
+}
+
+#msg {
+  color: #c0392b; /* vermelho para erro */
+}
+
+ul#lista-salas {
+  list-style: none;
+  max-width: 400px;
+  width: 100%;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+ul#lista-salas li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+ul#lista-salas li:last-child {
+  border-bottom: none;
+}
+
+/* Responsividade básica */
+@media (max-width: 500px) {
+  body {
+    padding: 10px;
+  }
+  form, ul#lista-salas {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
