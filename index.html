@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chaveiro Online - Admin</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Chaveiro Online - Painel do Administrador</h2>
+
+        <div class="controls">
+            <button onclick="abrirModalCadastro()">Cadastrar Usuário</button>
+            <button onclick="abrirModalChave()">Retirar/Devolver Chave</button>
+            <input type="date" id="filtro-data" />
+        </div>
+
+        <table id="tabela-registros">
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Usuário</th>
+                    <th>Sala</th>
+                    <th>Ação</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Registros serão inseridos dinamicamente -->
+            </tbody>
+        </table>
+
+        <div class="log" id="log"></div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal" id="modal-cadastro">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
+            <h3>Cadastrar Usuário</h3>
+            <form id="form-cadastro">
+                <input type="text" id="nome" placeholder="Nome" required />
+                <select id="tipo">
+                    <option value="0">Aluno</option>
+                    <option value="1">Servidor</option>
+                </select>
+                <input type="text" id="info" placeholder="Matrícula ou Função" required />
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Chave -->
+    <div class="modal" id="modal-chave">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modal-chave')">&times;</span>
+            <h3>Retirada / Devolução de Chave</h3>
+            <form id="form-chave">
+                <select id="usuario"></select>
+                <select id="sala"></select>
+                <select id="acao">
+                    <option value="retirada">Retirar</option>
+                    <option value="devolucao">Devolver</option>
+                </select>
+                <input type="password" id="senha" placeholder="Senha (1234)" required />
+                <button type="submit">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
