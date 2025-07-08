@@ -95,26 +95,82 @@ function log(msg) {
 }
 
 function carregarRegistros() {
-    registros = JSON.parse(localStorage.getItem("registros") || "[]");
-    const dataFiltro = filtroData.value ? new Date(filtroData.value).toDateString() : new Date().toDateString();
-    tabelaRegistros.innerHTML = "";
-    registros.forEach(reg => {
-        const dataRegistro = new Date(reg.createdAt).toDateString();
-        if (dataRegistro === dataFiltro) {
-            const usuario = usuarios.find(u => u.id === reg.usuarioId);
-            const sala = usuarios.find(u => u.id === reg.salaId);
-            tabelaRegistros.innerHTML += `
-        <tr>
-          <td>${new Date(reg.createdAt).toLocaleString()}</td>
-          <td>${usuario?.nome || "[Usuário]"}</td>
-          <td>${sala?.nome || "[Sala]"}</td>
-          <td>${reg.tipo}</td>
-          <td>${reg.status}</td>
-        </tr>`;
-        }
-    });
+    const tbody = document.querySelector("#tabela-registros tbody");
+    tbody.innerHTML = "";
+
+    const registros = JSON.parse(localStorage.getItem("registros") || "[]");
+    const filtroData = document.getElementById("filtro-data").value;
+
+    registros
+        .filter(reg => {
+            if (!filtroData) return true;
+
+            const dataRegistro = new Date(reg.createdAt);
+            const dataFiltro = new Date(filtroData);
+
+            // Corrigir timezone manualmente (UTC -> LocalTime)
+            const localDateRegistro = new Date(
+                dataRegistro.getTime() - dataRegistro.getTimezoneOffset() * 60000
+            );
+
+            return (
+                localDateRegistro.toISOString().split("T")[0] === filtroData
+            );
+        })
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .forEach(reg => {
+            const usuario = usuarios.find(u => u.id === reg.usuarioId)?.nome || "Usuário";
+            const sala = usuarios.find(u => u.id === reg.salaId)?.nome || "Sala";
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+        <td>${new Date(reg.createdAt).toLocaleString()}</td>
+        <td>${usuario}</td>
+        <td>${sala}</td>
+        <td>${reg.tipo}</td>
+        <td>${reg.status}</td>
+      `;
+
+            tbody.appendChild(tr);
+        });
 }
 
 filtroData.addEventListener("change", carregarRegistros);
 
 carregarUsuarios().then(carregarRegistros);
+function irParaConsulta() {
+    window.location.href = "consulta.html"; // certifique-se que o arquivo existe
+}
+
+function exportarCSV() {
+    const registros = JSON.parse(localStorage.getItem("registros") || "[]");
+    if (registros.length === 0) return alert("Nenhum registro para exportar.");
+
+    const linhas = [
+        ["Data/Hora", "Usuário", "Sala", "Ação", "Status"]
+    ];
+
+    registros.forEach(r => {
+        const usuario = usuarios.find(u => u.id === r.usuarioId)?.nome || "Usuário";
+        const sala = usuarios.find(u => u.id === r.salaId)?.nome || "Sala";
+        const data = new Date(r.createdAt).toLocaleString();
+        linhas.push([data, usuario, sala, r.tipo, r.status]);
+    });
+
+    const csv = linhas.map(l => l.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "registros_chaveiro.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function limparRegistros() {
+    if (confirm("Tem certeza que deseja apagar todos os registros?")) {
+        localStorage.removeItem("registros");
+        carregarRegistros();
+        log("Registros removidos com sucesso.");
+    }
+}

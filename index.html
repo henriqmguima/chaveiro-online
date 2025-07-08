@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chaveiro Online - Admin</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css\">
+    <style>
+
+
+
+    </style>
 </head>
 
 <body>
@@ -13,9 +25,15 @@
         <h2>Chaveiro Online - Painel do Administrador</h2>
 
         <div class="controls">
-            <button onclick="abrirModalCadastro()">Cadastrar Usuário</button>
-            <button onclick="abrirModalChave()">Retirar/Devolver Chave</button>
+            <button onclick="abrirModalCadastro()"><i class="fas fa-user-plus"></i>Cadastrar Usuário</button>
+            <button onclick="abrirModalChave()"><i class="fas fa-key"></i>Retirar/Devolver Chave</button>
             <input type="date" id="filtro-data" />
+        </div>
+
+        <div class="controls" style="margin-top: 10px;">
+            <button onclick="irParaConsulta()">Ir para Consulta Pública</button>
+            <button onclick="exportarCSV()">Exportar Registros (CSV)</button>
+            <button onclick="limparRegistros()">Limpar Todos os Registros</button>
         </div>
 
         <table id="tabela-registros">

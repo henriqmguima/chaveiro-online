@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consulta - Chaveiro Online</title>
+    <link rel="stylesheet" href="assets/css/consulta.css" />
+</head>
+</head>
+
+<body>
+    <div class="consulta-container">
+        <h2>Consulta de Chaves</h2>
+        <div class="form-consulta"> <label for="buscaSala">Consultar por Sala:</label> <select id="buscaSala"></select>
+            <button onclick="consultarSala()"><i class="fas fa-door-open"></i> Ver quem está com a chave</button>
+            <label for="buscaUsuario">Consultar por Professor:</label> <select id="buscaUsuario"></select> <button
+                onclick="consultarUsuario()"><i class="fas fa-user"></i> Ver qual sala está com ele(a)</button>
+        </div>
+        <div id="resultado" class="resultado">
+        </div>
+        <a href="index.html" class="voltar-admin">
+            <i class="fas fa-arrow-left"></i>
+            Voltar para Painel
+            Administrativo
+        </a>
+    </div>
+
+    <script src="assets/js/consulta.js"></script>
+</body>
+
+</html>
